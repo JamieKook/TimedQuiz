@@ -1,9 +1,10 @@
 //CountDown on page
 
 const timeOnPage= document.getElementById("timer")
+let time= 75; 
 
 function countDown(){
-    let time= 75; 
+    
     let timer= setInterval(function(){
        timeOnPage.textContent= "Time: "+ time + "s"; 
        time--; 
@@ -12,9 +13,15 @@ function countDown(){
         clearInterval(timer); 
     }
 
-    }, 1000)
+    }, 1000)   
+}
 
-    
+function resetCountDown(){
+    console.log(time);
+    time -= 10; 
+    console.log(time);
+    timeOnPage.textContent= "Time: "+ time + "s"; 
+  
 }
 
 document.getElementById("start").addEventListener("click", countDown);
@@ -75,10 +82,13 @@ function wrong(){
     main.appendChild(divider); 
     let lineDivide = document.createElement("hr"); 
     let wrongMessage = document.createElement("h5");
-    wrongMessage.textContent = "Wrong."; 
+    wrongMessage.textContent = "Wrong. You just lost 10 seconds!"; 
     wrongMessage.setAttribute("class", "p-2 m-2 text-center"); 
     divider.appendChild(lineDivide); 
     divider.appendChild(wrongMessage); 
+    resetCountDown(); 
+
+    
 }
 
 function generateQuestion(){
