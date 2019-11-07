@@ -69,26 +69,32 @@ let questionNum=0;
 function congrats(){
     let divider = document.createElement("div");
     divider.setAttribute("class","container text-center");
-    main.appendChild(divider);
+
+    
+    // main.appendChild(divider);
+
+    main.insertBefore(divider, main.children[0]); 
     let lineDivide = document.createElement("hr");
     let congMessage = document.createElement("h5");
     congMessage.textContent = "Correct!";
     congMessage.setAttribute("class", "p-2 m-2");
-    divider.appendChild(lineDivide);
+    
     divider.appendChild(congMessage);
+    divider.appendChild(lineDivide);
   
 }
 
 function wrong(){
     let divider = document.createElement("div");
     divider.setAttribute("class","container text-center");
-    main.appendChild(divider);
+    main.insertBefore(divider, main.children[0]);
     let lineDivide = document.createElement("hr");
     let wrongMessage = document.createElement("h5");
     wrongMessage.textContent = "Wrong. You just lost 10 seconds!";
     wrongMessage.setAttribute("class", "p-2 m-2 text-center");
-    divider.appendChild(lineDivide);
+    
     divider.appendChild(wrongMessage);
+    divider.appendChild(lineDivide);
     resetCountDown();
 
 
