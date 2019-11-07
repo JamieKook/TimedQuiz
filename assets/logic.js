@@ -57,7 +57,29 @@ let questionNum=0;
 
 
 
+function congrats(){
+    let divider = document.createElement("div");
+    divider.setAttribute("class","container text-center"); 
+    main.appendChild(divider); 
+    let lineDivide = document.createElement("hr"); 
+    let congMessage = document.createElement("h5");
+    congMessage.textContent = "Correct!"; 
+    congMessage.setAttribute("class", "p-2 m-2");
+    divider.appendChild(lineDivide); 
+    divider.appendChild(congMessage); 
+}
 
+function wrong(){
+    let divider = document.createElement("div");
+    divider.setAttribute("class","container text-center"); 
+    main.appendChild(divider); 
+    let lineDivide = document.createElement("hr"); 
+    let wrongMessage = document.createElement("h5");
+    wrongMessage.textContent = "Wrong."; 
+    wrongMessage.setAttribute("class", "p-2 m-2 text-center"); 
+    divider.appendChild(lineDivide); 
+    divider.appendChild(wrongMessage); 
+}
 
 function generateQuestion(){
 
@@ -67,7 +89,7 @@ function generateQuestion(){
 
     questionsTitle= document.createElement("h4");
     questionsTitle.textContent= questions[questionNum].title
-    questionsTitle.setAttribute("class", "p-4 mb-4 m-2");
+    questionsTitle.setAttribute("class", "p-4 mb-4 m-2 col-12");
      
     main.appendChild(questionsTitle); 
     main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center"); 
@@ -75,17 +97,23 @@ function generateQuestion(){
     for (i=0; i < 3; i++) {
         let questionAnswer =  document.createElement("button"); 
         questionAnswer.textContent= questions[questionNum].choices[i];
-        questionAnswer.setAttribute("class", "answerChoice btn btn-primary col-12 col-md-3 my-2 m-md-auto p-2");
+        questionAnswer.setAttribute("class", "answerChoice btn btn-primary col-12 col-lg-3 my-2 m-lg-auto p-2");
         questionAnswer.setAttribute("id", "question:"+questionNum + " answer:"+i); 
         if (questionNum !== (questions.length -1)) {
             questionAnswer.addEventListener("click", generateQuestion);
+            if (questions[questionNum].choices[i]=== questions[questionNum].answer){
+                questionAnswer.addEventListener("click", congrats);
+            } else {
+                questionAnswer.addEventListener("click", wrong); 
+            }
         }  
+       
+
         main.appendChild(questionAnswer); 
     }
 
     questionNum++; 
   
-
 }
 
 
