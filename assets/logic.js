@@ -2,6 +2,7 @@
 
 const timeOnPage= document.getElementById("timer")
 let time= 75;
+let isTimeStop= false; 
 
 function countDown(){
 
@@ -9,8 +10,9 @@ function countDown(){
        timeOnPage.textContent= "Time: "+ time + "s";
        time--;
 
-       if (time === 0) {
+       if (time === 0 || isTimeStop) {
         clearInterval(timer);
+        timeOnPage.textContent= "Time: "; 
     }
 
     }, 1000)
@@ -175,15 +177,23 @@ function endOfQuiz() {
     endScore.setAttribute("id", "score"); 
     endScore.textContent="Your score is " + time; 
 
+    isTimeStop = true; 
+    
+
     endDeclaration.setAttribute("class", "p-4 mb-4 m-2 col-12");
 
     main.appendChild(endScore);
+
+
+
+
 
 }
 
 function updateScore() {
     score= document.getElementById("score");
     score.textContent= "Your score is " + time; 
+  
 }
 
 
