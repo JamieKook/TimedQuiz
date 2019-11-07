@@ -67,6 +67,9 @@ let questionNum=0;
 
 
 function congrats(){
+
+    clearMain();
+
     let divider = document.createElement("div");
     divider.setAttribute("class","container text-center");
 
@@ -85,6 +88,9 @@ function congrats(){
 }
 
 function wrong(){
+
+    clearMain();
+
     let divider = document.createElement("div");
     divider.setAttribute("class","container text-center");
     main.insertBefore(divider, main.children[0]);
@@ -113,7 +119,7 @@ function clearMain(){
 
 function generateQuestion(){
 
-    clearMain();
+    
 
     questionsTitle= document.createElement("h4");
     questionsTitle.textContent= questions[questionNum].title
@@ -145,14 +151,16 @@ function generateQuestion(){
 
 
         if (questionNum !== (questions.length -1)) {
+            correctAnswer();
             questionAnswer.addEventListener("click", generateQuestion);
-            correctAnswer();
+            
         }  else if (questionNum === (questions.length-1)) {
-            questionAnswer.addEventListener("click",endOfQuiz);
             correctAnswer();
+            questionAnswer.addEventListener("click",endOfQuiz);
+            
 
             //Don't know why this is working this way. If not included then it doesn't work correctly but if included it subtracts score and doesn't need this function?
-            questionAnswer.addEventListener("click", updateScore); 
+            // questionAnswer.addEventListener("click", updateScore); 
             // if (questions[questionNum].choices[i] !== questions[questionNum].answer){
             //     questionAnswer.addEventListener("click", updateScore);
             // } 
@@ -169,8 +177,7 @@ function generateQuestion(){
 
 function endOfQuiz() {
 
-    clearMain();
-
+   
     endDeclaration= document.createElement("h4");
     endDeclaration.textContent= "Congratulations! You've finished the quiz.";
     endDeclaration.setAttribute("class", "p-4 mb-4 m-2 col-12");
@@ -203,7 +210,7 @@ function updateScore() {
 }
 
 
-
+document.getElementById("start").addEventListener("click", clearMain);
 document.getElementById("start").addEventListener("click", generateQuestion);
 
 
