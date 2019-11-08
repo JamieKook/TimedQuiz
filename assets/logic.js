@@ -1,5 +1,7 @@
 //Global variables
 
+
+
 const timeOnPage= document.getElementById("timer")
 let time= 75;
 let isTimeStop= false; 
@@ -21,8 +23,12 @@ function countDown(){
        time--;
 
        if (time === 0 || isTimeStop) {
-        clearInterval(timer);
-        timeOnPage.textContent= "Time: "; 
+            clearInterval(timer);
+           if (time === 0) {
+            youLose(); 
+           } else { 
+            timeOnPage.textContent= "Time: "; 
+           }  
     }
 
     }, 1000)
@@ -35,6 +41,8 @@ function resetCountDown(){
     timeOnPage.textContent= "Time: "+ time + "s";
 
 }
+
+
 
 
 //Quiz question bank
@@ -227,9 +235,21 @@ function endOfQuiz() {
 
 }
 
+// You lose page
 
 
+function youLose() {
+    clearMain()
+    loseEl= document.createElement("h1");
+    loseEl.textContent="You ran out of time!!!";
+    loseEl.style.color= "gold"; 
+    // loseEl.style.backgroundColor= "black";  
+    main.style.backgroundColor= "rgba(0,0,0,0.1)";  
+    main.appendChild(loseEl); 
+    document.body.style.backgroundImage="url(assets/images/lina-white-K9nxgkYf-RI-unsplash.jpg)"; 
+}
 
+object.style.backgroundImage="url(img_tree.gif)"
 // Logic for highscores page
 
 const backButton= document.getElementById("back");
