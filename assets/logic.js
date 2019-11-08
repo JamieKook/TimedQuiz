@@ -9,6 +9,8 @@ let isTimeStop= false;
 const main= document.getElementById("main");
 let questionNum=0;
 
+const highScoresArr = []
+
 //Clicking start button
 document.getElementById("start").addEventListener("click", countDown);
 document.getElementById("start").addEventListener("click", clearMain);
@@ -183,9 +185,25 @@ function generateQuestion(){
 
 //ending page of quiz with score
 
+let removeCorrectCounter=0; 
 function removeCorrect() {
+    if (removeCorrectCounter === 0){
         main.removeChild(main.firstChild);
+        removeCorrectCounter++
+    }
+}   
+
+function youLose() {
+    clearMain()
+    loseEl= document.createElement("h1");
+    loseEl.textContent="You ran out of time!!!";
+    loseEl.style.color= "gold"; 
+    // loseEl.style.backgroundColor= "black";  
+    main.style.backgroundColor= "rgba(0,0,0,0.1)";  
+    main.appendChild(loseEl); 
+    document.body.style.backgroundImage="url(assets/images/lina-white-K9nxgkYf-RI-unsplash.jpg)"; 
 }
+
 
 function endOfQuiz() {
 
@@ -221,35 +239,50 @@ function endOfQuiz() {
     scoreFormLabelEl.textContent="Enter Initials"; 
     scoreFormDividerEl.appendChild(scoreFormLabelEl);
 
+  
     scoreFormInputEl = document.createElement("input"); 
     scoreFormInputEl.setAttribute("type", "text");
     scoreFormInputEl.setAttribute("class", "form-control col-sm-3 p-1 mb-1");
     scoreFormInputEl.addEventListener("click", removeCorrect);  
     scoreFormDividerEl.appendChild(scoreFormInputEl); 
 
+
     scoreFormSubmit = document.createElement("button"); 
     scoreFormSubmit.setAttribute("type", "submit"); 
     scoreFormSubmit.setAttribute("class", "btn btn-success col-sm-3 p-1 mb-1"); 
     scoreFormSubmit.textContent= "Submit"; 
+    scoreFormSubmit.addEventListener("click", function(event){
+        event.preventDefault(); 
+        if (scoreFormInputEl.value === ""){
+        alert("Please insert your initials!"); 
+        return; 
+        }
+        if (typeof(Storage) !== "undefined") {
+            // Store
+            localStorage.setItem("initials", scoreFormInputEl.value);
+            localStorage.setItem("score", time);
+            } else {
+            document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+          }
+        redirect();
+    });
     scoreFormDividerEl.appendChild(scoreFormSubmit); 
-
-}
-
-// You lose page
-
-
-function youLose() {
-    clearMain()
-    loseEl= document.createElement("h1");
-    loseEl.textContent="You ran out of time!!!";
-    loseEl.style.color= "gold"; 
-    // loseEl.style.backgroundColor= "black";  
-    main.style.backgroundColor= "rgba(0,0,0,0.1)";  
-    main.appendChild(loseEl); 
-    document.body.style.backgroundImage="url(assets/images/lina-white-K9nxgkYf-RI-unsplash.jpg)"; 
+ 
 }
 
 
+// Retrieve
+
+
+
+function addHighScore() {
+   let initialsValue= localStorage.getItem("initials");
+   let scoreValue= localStorage.getItem("score");
+
+   highScoresArr.push({initials: initialsValue, score: scoreValue});
+    console.log(highScoresArr); 
+
+}
 
 
 
@@ -261,7 +294,6 @@ const backButton= document.getElementById("back");
 
 backButton.addEventListener("click", function(event) {
     event.preventDefault();
-    // window.location.href= "index.html";
 }); 
 
 const clearButton= document.getElementById("clear");
@@ -275,7 +307,19 @@ clearButton.addEventListener("click", function(event) {
 
 })
 
+function redirect(){
+    window.location.href = "highscores.html"; 
+     
+}
 
+function populateHighScore () {
+    let currentIndex= 0; 
+    addHighScore();
+    let newScore= document.createElement("li");
+    newScore.textContent= ""+highScoresArr[currentIndex].initials+" - "+highScoresArr[currentIndex].score;
+    currentIndex++
+    scoreListEl.appendChild(newScore); 
+}
 
     
 
