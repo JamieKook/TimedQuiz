@@ -126,7 +126,7 @@ function wrong(){
 function generateQuestion(){
 
     //format main section 
-    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center");
+    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 text-center");
 
 
     //populate question
@@ -197,7 +197,7 @@ function endOfQuiz() {
    
 
     main.appendChild(endDeclaration);
-    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center");
+    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 text-center");
 
 
     endScore = document.createElement("h5");
@@ -249,7 +249,12 @@ function youLose() {
     document.body.style.backgroundImage="url(assets/images/lina-white-K9nxgkYf-RI-unsplash.jpg)"; 
 }
 
-object.style.backgroundImage="url(img_tree.gif)"
+
+
+
+
+
+
 // Logic for highscores page
 
 const backButton= document.getElementById("back");
