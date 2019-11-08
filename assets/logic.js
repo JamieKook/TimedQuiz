@@ -1,9 +1,19 @@
-//CountDown on page
+//Global variables
 
 const timeOnPage= document.getElementById("timer")
 let time= 75;
 let isTimeStop= false; 
 
+const main= document.getElementById("main");
+let questionNum=0;
+
+//Clicking start button
+document.getElementById("start").addEventListener("click", countDown);
+document.getElementById("start").addEventListener("click", clearMain);
+document.getElementById("start").addEventListener("click", generateQuestion);
+
+
+//Functions invovling the timer
 function countDown(){
 
     let timer= setInterval(function(){
@@ -26,9 +36,8 @@ function resetCountDown(){
 
 }
 
-document.getElementById("start").addEventListener("click", countDown);
 
-//Quiz questions
+//Quiz question bank
 
 const questions = [
     {
@@ -58,13 +67,15 @@ const questions = [
     }
 ]
 
-// Question/Answer Format
+//Clear html on page in container Main
 
-main= document.getElementById("main");
+function clearMain(){
+    while (main.hasChildNodes()) {
+        main.removeChild(main.firstChild);
+    }
 
-let questionNum=0;
-
-
+}
+// Correct/Incorrect Answer Response on page- *Put on top of answer because I like it better there
 
 function congrats(){
 
@@ -72,10 +83,6 @@ function congrats(){
 
     let divider = document.createElement("div");
     divider.setAttribute("class","container text-center");
-
-    
-    // main.appendChild(divider);
-
     main.insertBefore(divider, main.children[0]); 
     let lineDivide = document.createElement("hr");
     let congMessage = document.createElement("h5");
@@ -101,42 +108,34 @@ function wrong(){
     
     divider.appendChild(wrongMessage);
     divider.appendChild(lineDivide);
+    //time penalty for wrong answer
     resetCountDown();
 
-
-
 }
 
-function clearMain(){
-    while (main.hasChildNodes()) {
-        main.removeChild(main.firstChild);
-    }
-
-}
-
-
-
+// function to create new quiz questions on click
 
 function generateQuestion(){
 
-    
+    //format main section 
+    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center");
 
+
+    //populate question
     questionsTitle= document.createElement("h4");
     questionsTitle.textContent= questions[questionNum].title
     questionsTitle.setAttribute("class", "p-4 mb-4 m-2 col-12");
 
     main.appendChild(questionsTitle);
-    main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center");
-
-
-
+    
+    // populate answer choices
     for (i=0; i < 3; i++) {
         let questionAnswer =  document.createElement("button");
         questionAnswer.textContent= questions[questionNum].choices[i];
         questionAnswer.setAttribute("class", "answerChoice btn btn-primary col-12 col-lg-3 my-2 m-lg-auto p-2");
         questionAnswer.setAttribute("id", "question:"+questionNum + " answer:"+i);
 
-    
+        //function that gives answer choices event listeners to determine which message to populate on next html page
         function correctAnswer (){
             if (questions[questionNum].choices[i]=== questions[questionNum].answer){
                 
@@ -145,17 +144,16 @@ function generateQuestion(){
             } else {
                 questionAnswer.addEventListener("click", wrong);
                
-
             }
         }
 
+        //calls function to add event listeners for right/wrong
+        correctAnswer();
 
+        //give answer choices event listeners to determine whether another question shows or if its the last screen 
         if (questionNum !== (questions.length -1)) {
-            correctAnswer();
-            questionAnswer.addEventListener("click", generateQuestion);
-            
+            questionAnswer.addEventListener("click", generateQuestion); 
         }  else if (questionNum === (questions.length-1)) {
-            correctAnswer();
             questionAnswer.addEventListener("click",endOfQuiz);
             
 
@@ -175,12 +173,16 @@ function generateQuestion(){
 
 }
 
+//ending page of quiz with score
+
 function endOfQuiz() {
 
-   
+    isTimeStop = true; 
+
     endDeclaration= document.createElement("h4");
-    endDeclaration.textContent= "Congratulations! You've finished the quiz.";
+    endDeclaration.textContent= "Congratulations! You beat the clock.";
     endDeclaration.setAttribute("class", "p-4 mb-4 m-2 col-12");
+   
 
     main.appendChild(endDeclaration);
     main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 bg-light text-center");
@@ -188,34 +190,71 @@ function endOfQuiz() {
 
     endScore = document.createElement("h5");
     endScore.setAttribute("id", "score"); 
+    endScore.setAttribute("class", "w-100"); 
     endScore.textContent="Your score is " + time; 
-
-    isTimeStop = true; 
-    
-
-    endDeclaration.setAttribute("class", "p-4 mb-4 m-2 col-12");
-
     main.appendChild(endScore);
 
 
+    scoreFormContainerEl= document.createElement("form");
+    scoreFormContainerEl.setAttribute("class", "w-100 m-2");; 
+    main.appendChild(scoreFormContainerEl); 
 
+    scoreFormDividerEl = document.createElement("div");
+    scoreFormDividerEl.setAttribute("class", "form-group row d-flex justify-content-around"); 
+    scoreFormContainerEl.appendChild(scoreFormDividerEl); 
+
+    scoreFormLabelEl = document.createElement("label");
+    scoreFormLabelEl.setAttribute("for", "initials");
+    scoreFormLabelEl.setAttribute("class", "col-sm-3 p-1 mb-1"); 
+    scoreFormLabelEl.textContent="Enter Initials"; 
+    scoreFormDividerEl.appendChild(scoreFormLabelEl);
+
+    scoreFormInputEl = document.createElement("input"); 
+    scoreFormInputEl.setAttribute("type", "text");
+    scoreFormInputEl.setAttribute("class", "form-control col-sm-3 p-1 mb-1"); 
+    scoreFormDividerEl.appendChild(scoreFormInputEl); 
+
+    scoreFormSubmit = document.createElement("button"); 
+    scoreFormSubmit.setAttribute("type", "submit"); 
+    scoreFormSubmit.setAttribute("class", "btn btn-success col-sm-3 p-1 mb-1"); 
+    scoreFormSubmit.textContent= "Submit"; 
+    scoreFormDividerEl.appendChild(scoreFormSubmit); 
 
 
 }
 
-function updateScore() {
-    score= document.getElementById("score");
-    score.textContent= "Your score is " + time; 
+
+    
+
+
+
+//     <form>
+//   <div class="form-group">
+//     <label for="exampleInputEmail1">Email address</label>
+//     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+//     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+//   </div>
+//   <div class="form-group">
+//     <label for="exampleInputPassword1">Password</label>
+//     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+//   </div>
+//   <div class="form-check">
+//     <input type="checkbox" class="form-check-input" id="exampleCheck1">
+//     <label class="form-check-label" for="exampleCheck1">Check me out</label>
+//   </div>
+//   <button type="submit" class="btn btn-primary">Submit</button>
+// </form>
+// }
+
+// No longer need this function now that correctanswer is before generate quiz question
+// function updateScore() {
+//     score= document.getElementById("score");
+//     score.textContent= "Your score is " + time; 
   
-}
-
-
-document.getElementById("start").addEventListener("click", clearMain);
-document.getElementById("start").addEventListener("click", generateQuestion);
+// }
 
 
 
-//What happens when you answer the quesiton
 
 
 
