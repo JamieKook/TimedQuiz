@@ -225,8 +225,31 @@ function endOfQuiz() {
     scoreFormSubmit.textContent= "Submit"; 
     scoreFormDividerEl.appendChild(scoreFormSubmit); 
 
-
 }
+
+
+
+
+// Logic for highscores page
+
+const backButton= document.getElementById("back");
+
+backButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    // window.location.href= "index.html";
+}); 
+
+const clearButton= document.getElementById("clear");
+const scoreListEl= document.getElementById("scorelist");
+
+clearButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    while (scoreListEl.hasChildNodes()) {
+        scoreListEl.removeChild(scoreListEl.firstChild);
+    }
+
+})
+
 
 
     

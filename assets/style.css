@@ -1,6 +1,20 @@
-body {
+.index {
     background-image: url("images/sonja-langford-eIkbSc3SDtI-unsplash.jpg");
     background-size: cover; 
     background-repeat: no-repeat;
 }
 
+.highscorePage {
+    background-image: url("images/charles-CBXJ6ljSDzM-unsplash.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.highscorePage h1 {
+    color: gold;
+}
+
+#backLink {
+    color: black;
+    text-decoration: none;
+}
