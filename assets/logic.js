@@ -9,8 +9,7 @@ let isTimeStop= false;
 const main= document.getElementById("main");
 let questionNum=0;
 
-let highScoresArr = []
-let currentIndex= 0; 
+ 
 
 let scoreListEl= document.getElementById("scorelist");
 let clearButton= document.getElementById("clear");
@@ -264,7 +263,7 @@ function endOfQuiz() {
     scoreFormInputEl.addEventListener("click", removeCorrect);  
     scoreFormDividerEl.appendChild(scoreFormInputEl); 
 
-
+    debugger; 
     scoreFormSubmit = document.createElement("button"); 
     scoreFormSubmit.setAttribute("type", "submit"); 
     scoreFormSubmit.setAttribute("class", "btn btn-success col-sm-3 p-1 mb-1"); 
@@ -285,10 +284,18 @@ function endOfQuiz() {
             // localStorage.getItem(currentIndex);
             // currentIndex++; 
             // localStorage.setItem(currentIndex); 
+            storedHighScores= JSON.parse(localStorage.getItem("storedHighScores")); 
+            if (storedHighScores=== null) {
+                storedHighScores = [];
+            }
+            storedHighScores.push({"initals":scoreFormInputEl.value, "score": time}); 
+            console.log(storedHighScores); 
 
-            localStorage.setItem("initials", scoreFormInputEl.value);
-            localStorage.setItem("score", time);
-            localStorage.setItem("currentIndex", currentIndex); 
+            storedHighScores= JSON.stringify(storedHighScores); 
+            localStorage.setItem("storedHighScores", storedHighScores); 
+            // localStorage.setItem("initials", );
+            // localStorage.setItem("score", time);
+            // localStorage.setItem("currentIndex", currentIndex); 
             } else {
             document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
           }
@@ -298,6 +305,9 @@ function endOfQuiz() {
     scoreFormDividerEl.appendChild(scoreFormSubmit); 
  
 }
+
+let highScoresArr = []
+let currentIndex= 0;
 
 // Logic for highscores page
 

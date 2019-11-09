@@ -34,23 +34,52 @@ clearButton.addEventListener("click", clearButtonFxn);
 
 
 function addHighScore() {
-    let initialsValue= localStorage.getItem("initials");
-    let scoreValue= localStorage.getItem("score");
-    currentIndex = highScoresArr.length; 
+    let storedHighScores= JSON.parse(localStorage.getItem("storedHighScores")); 
+    if (storedHighScores=== null) {
+        storedHighScores = [];
+    } else {
+        let currentLength = highScoresArr.length; 
+        for (i=0 ; i < currentLength; i++) {
+            let initialsValue = storedHighScores[i].initials; 
+            let scoreValue = storedHighScores[i].score; 
+        }
+        
+        
+    }
+
+
+    // console.log(storedHighScores); 
+    // let initialsValue= localStorage.getItem("initials");
+    // let scoreValue= localStorage.getItem("score");
+    // currentIndex = highScoresArr.length; 
  
-    highScoresArr.push({initials: initialsValue, score: scoreValue});
-     console.log(highScoresArr); 
+    // highScoresArr.push({initials: initialsValue, score: scoreValue});
+    //  console.log(highScoresArr); 
  
  }
  
- 
+ storedHighScores= JSON.parse(localStorage.getItem("storedHighScores")); 
 
 function populateHighScore () {
-    addHighScore();
+    // addHighScore();
+  
+    // if (storedHighScores=== null) {
+    //     storedHighScores = [];
+    // } else {
+        let currentLength = storedHighScores.length; 
+        for (i=0 ; i < currentLength; i++) {
+            // let initialsValue = storedHighScores[i].initials; 
+            // let scoreValue = storedHighScores[i].score; 
+
+            let newScore= document.createElement("li");
+            newScore.setAttribute("class", "bg-warning text-dark p-2 w-75");
+            newScore.textContent= ""+storedHighScores[i].initals+" - "+storedHighScores[i].score;
+            // currentIndex++
+            scoreListEl.appendChild(newScore); 
+        }
+        
+        
+    }
+
     
-    let newScore= document.createElement("li");
-    newScore.setAttribute("class", "bg-warning text-dark p-2 w-75");
-    newScore.textContent= ""+highScoresArr[currentIndex].initials+" - "+highScoresArr[currentIndex].score;
-    currentIndex++
-    scoreListEl.appendChild(newScore); 
-}
+
