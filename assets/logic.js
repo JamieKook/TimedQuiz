@@ -30,11 +30,13 @@ function countDown(){
 
        if (time === 0 || isTimeStop) {
             clearInterval(timer);
+            timeOnPage.textContent= "Time: "; 
            if (time === 0) {
             youLose(); 
-           } else { 
-            timeOnPage.textContent= "Time: "; 
-           }  
+           }
+        //    } else { 
+            
+        //    }  
     }
 
     }, 1000)
@@ -198,14 +200,23 @@ function removeCorrect() {
 }   
 
 function youLose() {
+   
     clearMain()
-    loseEl= document.createElement("h1");
+    let loseEl= document.createElement("h1");
     loseEl.textContent="You ran out of time!!!";
     loseEl.style.color= "gold"; 
     // loseEl.style.backgroundColor= "black";  
     main.style.backgroundColor= "rgba(0,0,0,0.1)";  
     main.appendChild(loseEl); 
     document.body.style.backgroundImage="url(assets/images/lina-white-K9nxgkYf-RI-unsplash.jpg)"; 
+
+    let retryBtn = document.createElement("button");
+    retryBtn.textContent="Try Again";
+    retryBtn.setAttribute("class", "try btn btn-warning col-12"); 
+    retryBtn.addEventListener("click", function(){
+        window.location.href = "index.html"; 
+    })
+    main.appendChild(retryBtn); 
 }
 
 

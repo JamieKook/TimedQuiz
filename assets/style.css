@@ -26,3 +26,7 @@
 ol {
     list-style-position: inside;
 }
+
+.try {
+    width: 50px; 
+}
