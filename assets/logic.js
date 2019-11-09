@@ -9,7 +9,11 @@ let isTimeStop= false;
 const main= document.getElementById("main");
 let questionNum=0;
 
-const highScoresArr = []
+let highScoresArr = []
+let currentIndex= 0; 
+
+let scoreListEl= document.getElementById("scorelist");
+let clearButton= document.getElementById("clear");
 
 //Clicking start button
 document.getElementById("start").addEventListener("click", countDown);
@@ -205,6 +209,11 @@ function youLose() {
 }
 
 
+function redirect(){
+    window.location.href = "highscores.html"; 
+     
+}
+ 
 function endOfQuiz() {
 
     isTimeStop = true; 
@@ -259,67 +268,72 @@ function endOfQuiz() {
         }
         if (typeof(Storage) !== "undefined") {
             // Store
+            // localStorage.getItem(highScoresArr); 
+            // highScoresArr.push({initials: scoreFormInputEl.value,
+            //                      score: time
+            //                     })
+            // localStorage.setItem(highScoresArr); 
+            // localStorage.getItem(currentIndex);
+            // currentIndex++; 
+            // localStorage.setItem(currentIndex); 
+
             localStorage.setItem("initials", scoreFormInputEl.value);
             localStorage.setItem("score", time);
+            localStorage.setItem("currentIndex", currentIndex); 
             } else {
             document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
           }
         redirect();
+        populateHighScore();
     });
     scoreFormDividerEl.appendChild(scoreFormSubmit); 
  
 }
 
-
-// Retrieve
-
-
-
-function addHighScore() {
-   let initialsValue= localStorage.getItem("initials");
-   let scoreValue= localStorage.getItem("score");
-
-   highScoresArr.push({initials: initialsValue, score: scoreValue});
-    console.log(highScoresArr); 
-
-}
-
-
-
-
-
 // Logic for highscores page
 
-const backButton= document.getElementById("back");
+// const backButton= document.getElementById("back");
 
-backButton.addEventListener("click", function(event) {
-    event.preventDefault();
-}); 
+// backButton.addEventListener("click", function(event) {
+//     event.preventDefault();
+// }); 
 
-const clearButton= document.getElementById("clear");
-const scoreListEl= document.getElementById("scorelist");
 
-clearButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    while (scoreListEl.hasChildNodes()) {
-        scoreListEl.removeChild(scoreListEl.firstChild);
-    }
+// clearButton.addEventListener("click", function(event) {
+//     event.preventDefault();
+// })
 
-})
 
-function redirect(){
-    window.location.href = "highscores.html"; 
-     
-}
+// function clearButtonFxn() {
+//     while (scoreListEl.hasChildNodes()) {
+//         scoreListEl.removeChild(scoreListEl.firstChild);
+//     }
+// }
 
-function populateHighScore () {
-    let currentIndex= 0; 
-    addHighScore();
-    let newScore= document.createElement("li");
-    newScore.textContent= ""+highScoresArr[currentIndex].initials+" - "+highScoresArr[currentIndex].score;
-    currentIndex++
-    scoreListEl.appendChild(newScore); 
-}
+// clearButton.addEventListener("click", clearButtonFxn); 
+
+
+// function addHighScore() {
+//     let initialsValue= localStorage.getItem("initials");
+//     let scoreValue= localStorage.getItem("score");
+//     currentIndex = highScoresArr.length; 
+ 
+//     highScoresArr.push({initials: initialsValue, score: scoreValue});
+//      console.log(highScoresArr); 
+ 
+//  }
+ 
+ 
+
+// function populateHighScore () {
+//     addHighScore();
+    
+//     let newScore= document.createElement("li");
+//     newScore.setAttribute("class", "bg-warning text-dark p-2 w-75");
+//     newScore.textContent= ""+highScoresArr[currentIndex].initials+" - "+highScoresArr[currentIndex].score;
+//     currentIndex++
+//     scoreListEl.appendChild(newScore); 
+// }
 
     
 

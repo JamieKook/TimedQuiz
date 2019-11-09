@@ -22,3 +22,7 @@
 #main {
     background-color: whitesmoke;
 }
+
+ol {
+    list-style-position: inside;
+}
