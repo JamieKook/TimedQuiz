@@ -165,13 +165,7 @@ function generateQuestion(){
             questionAnswer.addEventListener("click", generateQuestion); 
         }  else if (questionNum === (questions.length-1)) {
             questionAnswer.addEventListener("click",endOfQuiz);
-            
-
-            //Don't know why this is working this way. If not included then it doesn't work correctly but if included it subtracts score and doesn't need this function?
-            // questionAnswer.addEventListener("click", updateScore); 
-            // if (questions[questionNum].choices[i] !== questions[questionNum].answer){
-            //     questionAnswer.addEventListener("click", updateScore);
-            // } 
+        
 
         }
 
@@ -264,7 +258,7 @@ function endOfQuiz() {
     scoreFormInputEl.addEventListener("click", removeCorrect);  
     scoreFormDividerEl.appendChild(scoreFormInputEl); 
 
-    debugger; 
+
     scoreFormSubmit = document.createElement("button"); 
     scoreFormSubmit.setAttribute("type", "submit"); 
     scoreFormSubmit.setAttribute("class", "btn btn-success col-sm-3 p-1 mb-1"); 
@@ -276,15 +270,7 @@ function endOfQuiz() {
         return; 
         }
         if (typeof(Storage) !== "undefined") {
-            // Store
-            // localStorage.getItem(highScoresArr); 
-            // highScoresArr.push({initials: scoreFormInputEl.value,
-            //                      score: time
-            //                     })
-            // localStorage.setItem(highScoresArr); 
-            // localStorage.getItem(currentIndex);
-            // currentIndex++; 
-            // localStorage.setItem(currentIndex); 
+    
             storedHighScores= JSON.parse(localStorage.getItem("storedHighScores")); 
             if (storedHighScores=== null) {
                 storedHighScores = [];
@@ -294,80 +280,13 @@ function endOfQuiz() {
 
             storedHighScores= JSON.stringify(storedHighScores); 
             localStorage.setItem("storedHighScores", storedHighScores); 
-            // localStorage.setItem("initials", );
-            // localStorage.setItem("score", time);
-            // localStorage.setItem("currentIndex", currentIndex); 
+
             } else {
             document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
           }
         redirect();
-        populateHighScore();
     });
     scoreFormDividerEl.appendChild(scoreFormSubmit); 
  
 }
-
-let highScoresArr = []
-let currentIndex= 0;
-
-// Logic for highscores page
-
-// const backButton= document.getElementById("back");
-
-// backButton.addEventListener("click", function(event) {
-//     event.preventDefault();
-// }); 
-
-
-// clearButton.addEventListener("click", function(event) {
-//     event.preventDefault();
-// })
-
-
-// function clearButtonFxn() {
-//     while (scoreListEl.hasChildNodes()) {
-//         scoreListEl.removeChild(scoreListEl.firstChild);
-//     }
-// }
-
-// clearButton.addEventListener("click", clearButtonFxn); 
-
-
-// function addHighScore() {
-//     let initialsValue= localStorage.getItem("initials");
-//     let scoreValue= localStorage.getItem("score");
-//     currentIndex = highScoresArr.length; 
- 
-//     highScoresArr.push({initials: initialsValue, score: scoreValue});
-//      console.log(highScoresArr); 
- 
-//  }
- 
- 
-
-// function populateHighScore () {
-//     addHighScore();
-    
-//     let newScore= document.createElement("li");
-//     newScore.setAttribute("class", "bg-warning text-dark p-2 w-75");
-//     newScore.textContent= ""+highScoresArr[currentIndex].initials+" - "+highScoresArr[currentIndex].score;
-//     currentIndex++
-//     scoreListEl.appendChild(newScore); 
-// }
-
-    
-
-
-// No longer need this function now that correctanswer is before generate quiz question
-// function updateScore() {
-//     score= document.getElementById("score");
-//     score.textContent= "Your score is " + time; 
-  
-// }
-
-
-
-
-
-
 
