@@ -225,6 +225,7 @@ function redirect(){
 function endOfQuiz() {
 
     isTimeStop = true; 
+    let score= time; 
 
     endDeclaration= document.createElement("h4");
     endDeclaration.textContent= "Congratulations! You beat the clock.";
@@ -238,7 +239,7 @@ function endOfQuiz() {
     endScore = document.createElement("h5");
     endScore.setAttribute("id", "score"); 
     endScore.setAttribute("class", "w-100"); 
-    endScore.textContent="Your score is " + time; 
+    endScore.textContent="Your score is " + score; 
     main.appendChild(endScore);
 
 
@@ -288,7 +289,7 @@ function endOfQuiz() {
             if (storedHighScores=== null) {
                 storedHighScores = [];
             }
-            storedHighScores.push({"initals":scoreFormInputEl.value, "score": time}); 
+            storedHighScores.push({"initals":scoreFormInputEl.value, "score": score}); 
             console.log(storedHighScores); 
 
             storedHighScores= JSON.stringify(storedHighScores); 
