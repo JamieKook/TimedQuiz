@@ -14,6 +14,8 @@ let questionNum=0;
 let scoreListEl= document.getElementById("scorelist");
 let clearButton= document.getElementById("clear");
 
+let quizSelected; 
+
 //Clicking start button
 document.getElementById("start").addEventListener("click", function(){
     if (isSelected) {
@@ -136,7 +138,7 @@ function quizSelect(event) {
    
     console.log(event); 
 
-    let quizSelected= event.target.getAttribute("id"); 
+    quizSelected= event.target.getAttribute("id"); 
     quizName.textContent= "You've selected the " + quizSelected +" quiz!"
     switch (quizSelected) {
         case "Animal":
@@ -349,7 +351,7 @@ function endOfQuiz() {
             if (storedHighScores=== null) {
                 storedHighScores = [];
             }
-            storedHighScores.push({"initals":scoreFormInputEl.value, "score": score}); 
+            storedHighScores.push({"initals":scoreFormInputEl.value, "score": score, "quizType": quizSelected}); 
             console.log(storedHighScores); 
 
             storedHighScores= JSON.stringify(storedHighScores); 

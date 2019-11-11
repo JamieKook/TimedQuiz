@@ -63,7 +63,7 @@ function populateHighScore () {
     for (i=0 ; i < highScores.length; i++) {
         let newScore= document.createElement("li");
         newScore.setAttribute("class", "bg-warning text-dark m-auto p-2 w-75 my-2");
-        newScore.textContent= ""+highScores[i].initals+" - "+highScores[i].score;
+        newScore.textContent= ""+highScores[i].initals+" - "+highScores[i].score +", "+ highScores[i].quizType +" quiz";
         scoreListEl.appendChild(newScore); 
     }
 }; 
