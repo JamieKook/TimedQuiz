@@ -60,23 +60,9 @@ function resetCountDown(){
 
 
 
-//Functions for quiz selection
 
-document.getElementById("dropmenu").addEventListener("click", quizSelect); 
+//Quiz question bank and selection of quiz
 
-
-let quizName= document.createElement("h3");
-quizName.textContent= "You need to select a quiz!"
-let startButton = document.getElementById("start"); 
-main.insertBefore(quizName, startButton); 
-let isSelected= false; 
-let questions;
-
-//Quiz question bank
-
-
-
- 
 
 const animalQuestions=[
     {
@@ -151,6 +137,18 @@ function quizSelect(event) {
     isSelected= true; 
 }
 
+//Functions for quiz selection
+
+document.getElementById("dropmenu").addEventListener("click", quizSelect); 
+
+
+let quizName= document.createElement("h3");
+quizName.textContent= "You need to select a quiz!"
+let startButton = document.getElementById("start"); 
+main.insertBefore(quizName, startButton); 
+let isSelected= false; 
+let questions;
+
 
 //Clear html on page in container Main
 
@@ -160,8 +158,10 @@ function clearMain(){
     }
 
 }
-// Correct/Incorrect Answer Response on page- *Put on top of answer because I like it better there
 
+
+
+//audio files... I know I could figure out a more concise way to do this if I wanted but...
 function correctPlay(){
     var audio = document.getElementById("audio");
     audio.play();
@@ -177,6 +177,7 @@ function gameOverPlay(){
     audio.play();
 }
 
+// Correct/Incorrect Answer Response on page- *Put on top of answer because I like it better there
 function congrats(){
 
     clearMain();
@@ -344,7 +345,7 @@ function endOfQuiz() {
     scoreFormLabelEl = document.createElement("label");
     scoreFormLabelEl.setAttribute("for", "initials");
     scoreFormLabelEl.setAttribute("class", "col-sm-3 p-1 mb-1"); 
-    scoreFormLabelEl.textContent="Enter Initials"; 
+    scoreFormLabelEl.textContent="Enter Name"; 
     scoreFormDividerEl.appendChild(scoreFormLabelEl);
 
   
