@@ -39,10 +39,10 @@ function countDown(){
 
     let timer= setInterval(function(){
        timeOnPage.textContent= "Time: "+ time + "s";
-       if (time === 0 || isTimeStop) {
+       if (time <= 0 || isTimeStop) {
             clearInterval(timer);
             timeOnPage.textContent= "Time: "; 
-           if (time === 0) {
+           if (time <= 0) {
             youLose(); 
             }
         }
