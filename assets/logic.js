@@ -162,6 +162,21 @@ function clearMain(){
 }
 // Correct/Incorrect Answer Response on page- *Put on top of answer because I like it better there
 
+function correctPlay(){
+    var audio = document.getElementById("audio");
+    audio.play();
+}
+
+function incorrectPlay(){
+    var audio = document.getElementById("incorrectaudio");
+    audio.play();
+}
+
+function gameOverPlay(){
+    var audio = document.getElementById("gameoveraudio");
+    audio.play();
+}
+
 function congrats(){
 
     clearMain();
@@ -176,6 +191,9 @@ function congrats(){
     
     divider.appendChild(congMessage);
     divider.appendChild(lineDivide);
+    correctPlay(); 
+
+    
   
 }
 
@@ -195,6 +213,7 @@ function wrong(){
     divider.appendChild(lineDivide);
     //time penalty for wrong answer
     resetCountDown();
+    incorrectPlay(); 
 
 }
 
@@ -284,6 +303,7 @@ function youLose() {
         window.location.href = "index.html"; 
     })
     main.appendChild(retryBtn); 
+    gameOverPlay()
 }
 
 
