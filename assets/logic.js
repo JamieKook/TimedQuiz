@@ -15,9 +15,21 @@ let scoreListEl= document.getElementById("scorelist");
 let clearButton= document.getElementById("clear");
 
 //Clicking start button
-document.getElementById("start").addEventListener("click", countDown);
-document.getElementById("start").addEventListener("click", clearMain);
-document.getElementById("start").addEventListener("click", generateQuestion);
+document.getElementById("start").addEventListener("click", function(){
+    if (isSelected) {
+        countDown(); 
+        clearMain();
+        generateQuestion();
+    } else {
+        alert("You need to select a quiz from the dropdown menu!"); 
+    }
+     
+
+});
+// document.getElementById("start").addEventListener("click", clearMain);
+// document.getElementById("start").addEventListener("click", generateQuestion);
+
+
 
 
 //Functions invovling the timer
@@ -188,6 +200,7 @@ function wrong(){
 
 function generateQuestion(){
 
+ 
     //format main section 
     main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 text-center");
 
