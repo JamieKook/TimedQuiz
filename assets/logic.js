@@ -46,10 +46,25 @@ function resetCountDown(){
 
 
 
+//Functions for quiz selection
+
+document.getElementById("dropmenu").addEventListener("click", quizSelect); 
+
+
+let quizName= document.createElement("h3");
+quizName.textContent= "You need to select a quiz!"
+let startButton = document.getElementById("start"); 
+main.insertBefore(quizName, startButton); 
+let isSelected= false; 
+let questions;
 
 //Quiz question bank
 
-const questions = [
+
+
+ 
+
+const animalQuestions=[
     {
         title: "Which animal leaps out of the water to communicate with others of its kind?",
         choices: ["Flying fish", "Tadpole", "Whale"],
@@ -75,7 +90,53 @@ const questions = [
         choices: ["American buffalo", "Elk", "Prairie Dog"],
         answer: "American buffalo"
     }
-]
+]; 
+
+const historyQuestions = [
+    {
+        title: "Through which national park does the Continental Divide not pass?",
+        choices:["Rocky mountain", "Glaicer", "Yosemite"],
+        answer: "Yosemite"
+    },
+    {
+        title: "On what peninsula in Washington would you find the Olympic Mountains?",
+        choices: ["Olympic", "Washington", "Seatlle"],
+        answer: "Olympic"
+    },
+    {
+        title: "Who was the first U.S. president to appear on television?",
+        choices: ["Fanklin Delano Roosevelt", "Abraham Lincoln", "Richard Nixon"], 
+        answer: "Fanklin Delano Roosevelt"
+    },
+    {
+        title: "What automobile was named after Henry Ford’s only son?", 
+        choices: ["Buick", "Edsel", "Isuzu"],
+        answer: "Edsel"
+    },
+    {
+        title: "In what American state would you find Denali?",
+        choices: ["Alaska", "Arkansas", "Arizona"], 
+        answer: "Alaska"
+    }
+]; 
+
+function quizSelect(event) {
+   
+    console.log(event); 
+
+    let quizSelected= event.target.getAttribute("id"); 
+    quizName.textContent= "You've selected the " + quizSelected +" quiz!"
+    switch (quizSelected) {
+        case "Animal":
+            questions= animalQuestions; 
+            console.log(animalQuestions); 
+            break;
+        case "History": 
+            questions= historyQuestions; 
+    }
+    isSelected= true; 
+}
+
 
 //Clear html on page in container Main
 
@@ -130,7 +191,7 @@ function generateQuestion(){
     //format main section 
     main.setAttribute("class", "container row p-5 mx-auto my-5 w-75 text-center");
 
-
+  
     //populate question
     questionsTitle= document.createElement("h4");
     questionsTitle.textContent= questions[questionNum].title
