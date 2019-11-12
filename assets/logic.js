@@ -100,7 +100,7 @@ const historyQuestions = [
     },
     {
         title: "On what peninsula in Washington would you find the Olympic Mountains?",
-        choices: ["Olympic", "Washington", "Seatlle"],
+        choices: ["Olympic", "Washington", "Seatle"],
         answer: "Olympic"
     },
     {
