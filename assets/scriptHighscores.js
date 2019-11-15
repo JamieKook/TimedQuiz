@@ -38,7 +38,7 @@ function populateHighScore () {
     let scoreArr = [];
     let numberOfHighScores= 0; 
     let currentLength = storedHighScores.length; 
-    for (i=0 ; i < currentLength; i++) {
+    for (let i=0 ; i < currentLength; i++) {
         scoreArr.push(storedHighScores[i].score); 
     }
     console.log(scoreArr); 
@@ -48,7 +48,7 @@ function populateHighScore () {
     while (numberOfHighScores < 5 && numberOfHighScores < storedHighScores.length) {
         largestScore= Math.max(...scoreArr); 
         console.log(largestScore); 
-        for (i=0 ; i < currentLength; i++) {
+        for (let i=0 ; i < currentLength; i++) {
             if (storedHighScores[i].score === largestScore && numberOfHighScores < 5) {
                 highScores.push(storedHighScores[i])
                 let spliceIndex= scoreArr.indexOf(largestScore); 
@@ -60,7 +60,7 @@ function populateHighScore () {
         } 
     }
   
-    for (i=0 ; i < highScores.length; i++) {
+    for (let i=0 ; i < highScores.length; i++) {
         let newScore= document.createElement("li");
         newScore.setAttribute("class", "bg-warning text-dark m-auto p-2 w-75 my-2");
         newScore.textContent= ""+highScores[i].initals+" - "+highScores[i].score +", "+ highScores[i].quizType +" quiz";

@@ -235,7 +235,7 @@ function generateQuestion(){
     main.appendChild(questionsTitle);
     
     // populate answer choices
-    for (i=0; i < 3; i++) {
+    for (let i=0; i < 3; i++) {
         let questionAnswer =  document.createElement("button");
         questionAnswer.textContent= questions[questionNum].choices[i];
         questionAnswer.setAttribute("class", "answerChoice btn btn-primary col-12 col-lg-3 my-2 m-lg-auto p-2");
