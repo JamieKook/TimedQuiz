@@ -28,10 +28,6 @@ document.getElementById("start").addEventListener("click", function(){
      
 
 });
-// document.getElementById("start").addEventListener("click", clearMain);
-// document.getElementById("start").addEventListener("click", generateQuestion);
-
-
 
 
 //Functions invovling the timer
@@ -124,6 +120,10 @@ function quizSelect(event) {
    
     console.log(event); 
 
+    if (event.target.getAttribute("id")==="dropmenu"){
+        isSelected=false; 
+        return; 
+    }
     quizSelected= event.target.getAttribute("id"); 
     quizName.textContent= "You've selected the " + quizSelected +" quiz!"
     switch (quizSelected) {
